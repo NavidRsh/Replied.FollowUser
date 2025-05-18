@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace Replied.FollowUser.Application.Commands.FollowUser;
 public class FollowUserCommandHandler : IRequestHandler<FollowUserCommand, bool>
 {
-    private readonly IUserRepository _repository;
+    private readonly IUserCommandRepository _repository;
 
-    public FollowUserCommandHandler(IUserRepository repository)
+    public FollowUserCommandHandler(IUserCommandRepository repository)
     {
         _repository = repository;
     }

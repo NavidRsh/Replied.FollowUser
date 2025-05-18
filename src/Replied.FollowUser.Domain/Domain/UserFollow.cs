@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Replied.FollowUser.Domain.Domain;
-public class UserFollow
+public class UserFollow : BaseEntity
 {
     public Guid FollowerId { get; set; }
     public User Follower { get; set; }
@@ -14,6 +14,5 @@ public class UserFollow
     public User Followee { get; set; }
 
     public DateTime FollowedAt { get; set; } = DateTime.UtcNow;
-
     public bool IsCloseFriend { get; set; }
 }

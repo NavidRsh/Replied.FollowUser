@@ -1,22 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Replied.FollowUser.Application.Contracts.Repositories;
+using Replied.FollowUser.Infrastructure.InMemory.Repositories;
 
 namespace Replied.FollowUser.Infrastructure.InMemory;
 public static class ConfigueInMemoryServices
 {
-    public static IServiceCollection AddEfServices(this IServiceCollection services)
+    public static IServiceCollection AddnMemoryServices(this IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("MyInMemoryDb"));
         
-        //services.AddEfRepositories();
+        services.AddRepositories();
 
         return services;
     }
+
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IUserCommandRepository, UserCommandRepository>();
+
+        services.AddScoped<IUserQueryRepository, UserQueryRepository>();        
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>(); 
+    }   
 
 }
