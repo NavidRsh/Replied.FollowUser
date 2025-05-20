@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Replied.FollowUser.Application.Commands.FollowUser;
+
+/// <summary>
+/// Handles the command to send a follow request from one user to another.
+/// </summary>
 public class SendFollowRequestCommandHandler : 
     IRequestHandler<SendFollowReqeustCommand, SendFollowRequestResponse>
 {
@@ -23,6 +27,10 @@ public class SendFollowRequestCommandHandler :
         this._lockService = lockService;
     }
 
+    /// <summary>
+    /// Processes the follow request command by validating users, locking,
+    /// invoking the domain logic, and saving changes.
+    /// </summary>
     public async Task<SendFollowRequestResponse> Handle(SendFollowReqeustCommand request,
         CancellationToken cancellationToken)
     {
@@ -46,6 +54,10 @@ public class SendFollowRequestCommandHandler :
         }
     }
 
+    /// <summary>
+    /// Fetches the followee user from the repository, including block relationship data.
+    /// </summary>
+    /// <exception cref="UserNotFoundException">Thrown when the user is not found.</exception>
     private async Task<User> FetchFolloweeAsync(SendFollowReqeustCommand request)
     {
         User? followee = await _unitOfWork.Users
@@ -59,6 +71,10 @@ public class SendFollowRequestCommandHandler :
         return followee;
     }
 
+    /// <summary>
+    /// Fetches the follower user from the repository, including following relationship data.
+    /// </summary>
+    /// <exception cref="UserNotFoundException">Thrown when the user is not found.</exception>
     private async Task<User> FetchFollowerAsync(SendFollowReqeustCommand request)
     {
         User? follower = await _unitOfWork.Users
