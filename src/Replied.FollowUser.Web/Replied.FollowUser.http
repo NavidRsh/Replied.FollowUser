@@ -1,0 +1,6 @@
+@Replied.FollowUser_HostAddress = http://localhost:5294
+
+GET {{Replied.FollowUser_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
