@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Replied.FollowUser.Application.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,10 @@ public static class ConfigureApplicationServices
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(cfg => 
-        cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+                 cfg.RegisterServicesFromAssembly(
+                     Assembly.GetExecutingAssembly()));
+
+        services.AddSingleton<ILockService, InternalLockService>(); 
 
         return services;
     }

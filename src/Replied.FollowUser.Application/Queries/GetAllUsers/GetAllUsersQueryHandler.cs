@@ -7,17 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Replied.FollowUser.Application.Queries.GetAllUsers;
-public class GetAllUsersCommandHandler :
-    IRequestHandler<GetAllUsersCommand, GetAllUsersResponse>
+public class GetAllUsersQueryHandler :
+    IRequestHandler<GetAllUsersQuery, GetAllUsersResponse>
 {
     private readonly IUserQueryRepository _userQueryRepository;
 
-    public GetAllUsersCommandHandler(IUserQueryRepository userQueryRepository)
+    public GetAllUsersQueryHandler(IUserQueryRepository userQueryRepository)
     {
         this._userQueryRepository = userQueryRepository;
     }
 
-    public async Task<GetAllUsersResponse> Handle(GetAllUsersCommand request, CancellationToken cancellationToken)
+    public async Task<GetAllUsersResponse> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         return new GetAllUsersResponse(await _userQueryRepository
             .GetAllAsync());         
